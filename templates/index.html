@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concesionaria de Autos</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+
+        <nav>
+        <a href=""><img src="{{ url_for('static', filename='img/1.png') }}" alt=""></a>
+
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Registrarse</a></li>
+                <li><a href="#">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="recently-added">
+            <h2>Agregados Recientemente</h2>
+            <div class="card-container">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/mazda.png') }}" alt="Carro 1">
+                    <h3>Mazda CX-30</h3>
+                    <p>Nuevo</p>
+                    <button>VER MÁS...</button>
+                    <button>COMPRAR</button>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/ñuñukii.avif') }}" alt="Carro 2">
+                    <h3>Suzuki S-presso</h3>
+                    <p>Nuevo</p>
+                    <button>VER MÁS...</button>
+                    <button>COMPRAR</button>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/supra.jpg') }}" alt="Carro 3">
+                    <h3>Toyota Gr supra</h3>
+                    <p>Nuevo</p>
+                    <button>VER MÁS...</button>
+                    <button>COMPRAR</button>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/mitsubichi.jpg') }}" alt="Carro 4">
+                    <h3>Mitsubishi Mirage</h3>
+                    <p>Nuevo</p>
+                    <button>VER MÁS...</button>
+                    <button>COMPRAR</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Contacto: info@Laesquinamotors.com</p>
+        <p>Síguenos en redes sociales</p>
+    </footer>
+</body>
+</html>
