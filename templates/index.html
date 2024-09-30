@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concesionaria de Autos</title>
+    <title>La esquina Motors</title>
     <link rel="stylesheet" href="/static/style.css">
+    
 </head>
 <body>
     <header>
@@ -13,10 +14,11 @@
         <a href=""><img src="{{ url_for('static', filename='img/1.png') }}" alt=""></a>
 
             <ul>
-                <li><a href="#">Inicio</a></li>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
                 <li><a href="#">Catálogo</a></li>
-                <li><a href="#">Registrarse</a></li>
-                <li><a href="#">Iniciar Sesión</a></li>
+                <li><a href="#">Quienes Somos</a></li>
+                <li><div id="user-info"></div>
+    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button></li>
             </ul>
         </nav>
     </header>
@@ -28,31 +30,54 @@
                     <img src="{{ url_for('static', filename='img/mazda.png') }}" alt="Carro 1">
                     <h3>Mazda CX-30</h3>
                     <p>Nuevo</p>
-                    <button>VER MÁS...</button>
+                    <button><a href="{{ url_for('mazda') }}">VER MÁS...</a></button>
                     <button>COMPRAR</button>
                 </div>
                 <div class="card">
                     <img src="{{ url_for('static', filename='img/ñuñukii.avif') }}" alt="Carro 2">
                     <h3>Suzuki S-presso</h3>
                     <p>Nuevo</p>
-                    <button>VER MÁS...</button>
+                    <button><a href="{{ url_for('suzuki') }}">VER MÁS...</a></button>
                     <button>COMPRAR</button>
                 </div>
                 <div class="card">
                     <img src="{{ url_for('static', filename='img/supra.jpg') }}" alt="Carro 3">
                     <h3>Toyota Gr supra</h3>
                     <p>Nuevo</p>
-                    <button>VER MÁS...</button>
+                    <button><a href="{{ url_for('supra') }}">VER MÁS...</a></button>
                     <button>COMPRAR</button>
                 </div>
                 <div class="card">
                     <img src="{{ url_for('static', filename='img/mitsubichi.jpg') }}" alt="Carro 4">
                     <h3>Mitsubishi Mirage</h3>
                     <p>Nuevo</p>
-                    <button>VER MÁS...</button>
+                    <button><a href="{{ url_for('mirage') }}">VER MÁS...</a></button>
                     <button>COMPRAR</button>
                 </div>
             </div>
+            
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide"><a href=""><img src="{{ url_for('static', filename='img/toyota2.jpg') }}" alt="Image 1"></a></div>
+        <div class="slide"><a href=""><img src="{{ url_for('static', filename='img/toyota1.png') }}" alt="Image 2"></a></div>
+        <div class="slide"><a href=""><img src="{{ url_for('static', filename='img/toyota3.png') }}" alt="Image 3"></a></div>
+    </div>
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
+</div>
+
+
+
+            
+        <div class="comments-section">
+        <h2>Comentarios</h2>
+        <div id="comments-container"></div>
+        <div class="comment-form">
+            <input type="text" id="name-input" placeholder="Tu nombre">
+            <textarea id="comment-input" placeholder="Escribe tu comentario aquí..."></textarea>
+            <button onclick="addComment()">Agregar Comentario</button>
+        </div>
+    </div>
         </section>
     </main>
     <footer>
@@ -61,3 +86,153 @@
     </footer>
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+<script>
+
+
+         const usuarioRegistrado = localStorage.getItem('usuario');
+        const userDiv = document.getElementById('user-info');
+        const cerrarSesionButton = document.getElementById('cerrar-sesion');
+
+        if (usuarioRegistrado) {
+            userDiv.textContent = `¡Bienvenido, ${usuarioRegistrado}!`;
+            cerrarSesionButton.style.display = 'block';
+        } else {
+            const registroButton = document.createElement('button');
+            registroButton.textContent = 'Registro';
+            registroButton.className = 'registro'; 
+            registroButton.addEventListener('click', () => {
+                window.location.href = '{{ url_for('registro') }}';
+            });
+            userDiv.appendChild(registroButton);
+        }
+
+        cerrarSesionButton.addEventListener('click', () => {
+            localStorage.removeItem('usuario');
+            window.location.href = '{{ url_for('index') }}';
+        });
+
+        document.addEventListener('DOMContentLoaded', loadComments);
+
+function addComment() {
+    const nameInput = document.getElementById('name-input');
+    const commentInput = document.getElementById('comment-input');
+    const nameText = nameInput.value.trim();
+    const commentText = commentInput.value.trim();
+    
+    if (nameText && commentText) {
+        const comment = {
+            name: nameText,
+            text: commentText
+        };
+        
+        saveComment(comment);
+        displayComment(comment);
+        
+        nameInput.value = '';
+        commentInput.value = '';
+    }
+}
+
+function saveComment(comment) {
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push(comment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+function loadComments() {
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.forEach(comment => displayComment(comment));
+}
+
+function displayComment(comment) {
+    const commentContainer = document.createElement('div');
+    commentContainer.className = 'comment';
+    
+    const commentName = document.createElement('p');
+    commentName.className = 'comment-name';
+    commentName.textContent = comment.name;
+    commentContainer.appendChild(commentName);
+    
+    const commentParagraph = document.createElement('p');
+    commentParagraph.textContent = comment.text;
+    commentContainer.appendChild(commentParagraph);
+    
+    const commentButtons = document.createElement('div');
+    commentButtons.className = 'comment-buttons';
+    
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Editar';
+    editButton.onclick = () => editComment(commentContainer, commentParagraph, comment);
+    commentButtons.appendChild(editButton);
+    
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Eliminar';
+    deleteButton.onclick = () => deleteComment(commentContainer, comment);
+    commentButtons.appendChild(deleteButton);
+    
+    commentContainer.appendChild(commentButtons);
+    
+    document.getElementById('comments-container').appendChild(commentContainer);
+}
+
+function editComment(commentContainer, commentParagraph, comment) {
+    const newCommentText = prompt('Edita tu comentario:', commentParagraph.textContent);
+    if (newCommentText !== null) {
+        commentParagraph.textContent = newCommentText.trim();
+        updateComment(comment, newCommentText.trim());
+    }
+}
+
+function updateComment(comment, newText) {
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    const index = comments.findIndex(c => c.text === comment.text && c.name === comment.name);
+    if (index !== -1) {
+        comments[index].text = newText;
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
+}
+
+function deleteComment(commentContainer, comment) {
+    commentContainer.remove();
+    removeComment(comment);
+}
+
+function removeComment(comment) {
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments = comments.filter(c => c.text !== comment.text || c.name !== comment.name);
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+
+let currentIndex = 0;
+
+function showSlide(index) {
+    if (index >= slides.length) {
+        currentIndex = 0;
+    } else if (index < 0) {
+        currentIndex = slides.length - 1;
+    } else {
+        currentIndex = index;
+    }
+    slider.style.transform = `translateX(${-currentIndex * 100}%)`;
+}
+
+prevButton.addEventListener('click', () => {
+    showSlide(currentIndex - 1);
+});
+
+nextButton.addEventListener('click', () => {
+    showSlide(currentIndex + 1);
+});
+
+// Inicializa el slider
+showSlide(currentIndex);
+
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toyota Gr Supra</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<style>
+
+
+</style>
+</head>
+
+<body>
+ <header>
+
+        <nav>
+        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/1.png') }}" alt=""></a>
+
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Quienes Somos</a></li>
+                <li><div id="user-info"></div>
+    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+<div class="todo">
+<div class="contenedor">
+    <div class="car-images">
+        <img id="grande" src="{{ url_for('static', filename='img/mirage1.png') }}" alt="Nissan Skyline R34 V-SPEC">
+    </div>
+    <div class="imagenes">
+        <img src="{{ url_for('static', filename='img/mirage2.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mirage3.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mirage4.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mirage1.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+    </div>
+</div>
+<div class="detalles_todo">
+    <h2>Mitsubichi Mirage</h2>
+    <ul class="detalles">
+        <li>Patente: LM JS92</li>
+        <li>Modelo/Serie: Mirage</li>
+        <li>Año: 2019</li>
+        <li>Odómetro: 0km</li>
+        <li>Motor: 3 cilindros de 78 caballos de fuerza, 1.2 litros</li>
+        <li>Transmisión: Manual</li>
+        <li>Color: Gris</li>
+        <li>Espejos de fibra de carbono</li>
+        <li>Interior de cuero</li>
+    </ul>
+    <button class="buy-button">Comprar vehículo</button>
+    <button class="rent-button">Alquilar vehículo</button>
+</div>
+</div>
+
+<script>
+  function changeImage(element) {
+    var mainImage = document.getElementById('grande');
+    mainImage.src = element.src;
+  }
+</script>
+
+</body>
+</html>

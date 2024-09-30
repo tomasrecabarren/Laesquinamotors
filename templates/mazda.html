@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mazda CX-30</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<style>
+
+
+</style>
+</head>
+
+<body>
+ <header>
+
+        <nav>
+        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/1.png') }}" alt=""></a>
+
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Quienes Somos</a></li>
+                <li><div id="user-info"></div>
+    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+<div class="todo">
+<div class="contenedor">
+    <div class="car-images">
+        <img id="grande" src="{{ url_for('static', filename='img/mazda1.png') }}" alt="Nissan Skyline R34 V-SPEC">
+    </div>
+    <div class="imagenes">
+        <img src="{{ url_for('static', filename='img/mazda2.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mazda3.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mazda4.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+        <img src="{{ url_for('static', filename='img/mazda1.png') }}" alt="Nissan Skyline R34 V-SPEC" onclick="changeImage(this)">
+    </div>
+</div>
+<div class="detalles_todo">
+    <h2>Mazda CX-30</h2>
+    <ul class="detalles">
+        <li>Patente: CB KL34</li>
+        <li>Modelo/Serie: CX-30</li>
+        <li>Año: 2019</li>
+        <li>Odómetro: 0 km</li>
+        <li>Motor: Skyactiv-G 2,0L</li>
+        <li>Transmisión: Manual</li>
+        <li>Color: Rojo</li>
+        <li>Espejos de fibra de carbono</li>
+        <li>Interior de cuero</li>
+    </ul>
+    <button class="buy-button">Comprar vehículo</button>
+    <button class="rent-button">Alquilar vehículo</button>
+</div>
+</div>
+
+<script>
+  function changeImage(element) {
+    var mainImage = document.getElementById('grande');
+    mainImage.src = element.src;
+  }
+</script>
+
+</body>
+</html>
+
+
