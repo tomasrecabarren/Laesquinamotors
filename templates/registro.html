@@ -1,62 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concesionaria de Autos</title>
-    <link rel="stylesheet" href="/static/style.css">
-      <script src="/static/java.js"></script>
-
+    <title>Document</title>
 </head>
 <body>
-    <header>
-
-        <nav>
-        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/1.png') }}" alt=""></a>
-
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Catálogo</a></li>
-                <li><a href="#">Quienes Somos</a></li>
-                    <div id="user-info">
-    </div>
-    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button>
-            </ul>
-        </nav>
-    </header>
-   <form id="registro-form">
-        <label for="nombreUsuario">Nombre de Usuario:</label>
-        <input type="text" id="nombreUsuario" required>
-
-        <label for="Correo">Correo</label>
-        <input type="email" name="" id="" required >
-
-        <label for="FechaNacimiento">Fecha de nacimiento</label>
-        <input type="date" name=""  id="" required max="2024-07-30">
-
-        <label for="Contrasela">Contraseña</label>
-        <input type="password" name="" id="" required>
-        
-
-        <button type="submit">Registrarse</button>
+    <form method="post">
+    nombre de usuario: <input type="text" name="nombre_usuario"><br>
+    contraseña: <input type="password" name="contraseña"><br>
+    <input type="submit" value="Registrar">
     </form>
-    <footer>
-        <p>Contacto: info@Laesquinamotors.com</p>
-        <p>Síguenos en redes sociales</p>
-    </footer>
+    <button onclick="window.location.href='/login';">Ir a inicio de Sesion</button>
 </body>
 </html>
-<script>
-
-        document.getElementById('registro-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nombreUsuario = document.getElementById('nombreUsuario').value;
-            localStorage.setItem('usuario', nombreUsuario);
-            window.location.href = '{{ url_for('index') }}';
-        });
-</script>
-<style>
-nav{
-    margin-left: 50px;
-}
-</style>

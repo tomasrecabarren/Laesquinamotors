@@ -16,15 +16,23 @@
             <ul>
                 <li><a href="{{ url_for('index') }}">Inicio</a></li>
                 <li><div class="dropdown"><button class="dropbtn">Catalogo</button><div class="dropdown-content">
-                   <a href="#">Autos nuevos</a>
-                   <a href="#">Autos usados</a>
-                   <a href="#">Más vendidos</a>
+                    <a href="#">Autos nuevos</a>
+                    <a href="#">Autos usados</a>
+                    <a href="#">Más vendidos</a>
 
-                 </div>
-             </div></li>
+                </div>
+            </div></li>
                 <li><a href="#">Quienes Somos</a></li>
-                <li><div id="user-info"></div>
-    <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button></li>
+                {% if username %}
+                <h1>Bienvenido, {{username}}! </h1>
+                <form action="{{url_for('logout')}}" method="post">
+                    <input type="submit" value="cerrar sesion">
+                </form>
+                {% else %}
+                <h1>Bienvenido al sitio</h1>
+                <button onclick="window.location.href='/registro';">Registrarse</button>
+                <button onclick="window.location.href='/login';">Iniciar sesion</button>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -95,30 +103,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
 <script>
-
-
-         const usuarioRegistrado = localStorage.getItem('usuario');
-        const userDiv = document.getElementById('user-info');
-        const cerrarSesionButton = document.getElementById('cerrar-sesion');
-
-        if (usuarioRegistrado) {
-            userDiv.textContent = `¡Bienvenido, ${usuarioRegistrado}!`;
-            cerrarSesionButton.style.display = 'block';
-        } else {
-            const registroButton = document.createElement('button');
-            registroButton.textContent = 'Registro';
-            registroButton.className = 'registro'; 
-            registroButton.addEventListener('click', () => {
-                window.location.href = '{{ url_for('registro') }}';
-            });
-            userDiv.appendChild(registroButton);
-        }
-
-        cerrarSesionButton.addEventListener('click', () => {
-            localStorage.removeItem('usuario');
-            window.location.href = '{{ url_for('index') }}';
-        });
-
         document.addEventListener('DOMContentLoaded', loadComments);
 
 function addComment() {
