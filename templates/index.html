@@ -15,7 +15,13 @@
 
             <ul>
                 <li><a href="{{ url_for('index') }}">Inicio</a></li>
-                <li><a href="#">Catálogo</a></li>
+                <li><div class="dropdown"><button class="dropbtn">Catalogo</button><div class="dropdown-content">
+                   <a href="#">Autos nuevos</a>
+                   <a href="#">Autos usados</a>
+                   <a href="#">Más vendidos</a>
+
+                 </div>
+             </div></li>
                 <li><a href="#">Quienes Somos</a></li>
                 <li><div id="user-info"></div>
     <button id="cerrar-sesion" style="display: none;">Cerrar Sesión</button></li>
@@ -55,7 +61,7 @@
                     <button>COMPRAR</button>
                 </div>
             </div>
-            
+
 <div class="slider-container">
     <div class="slider">
         <div class="slide"><a href=""><img src="{{ url_for('static', filename='img/toyota2.jpg') }}" alt="Image 1"></a></div>
